@@ -68,19 +68,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+	
+	<h1><?php echo lang('index_heading');?></h1>
+	<p><?php echo lang('index_subheading');?></p>
 
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+	<div id="infoMessage"><?php echo $message;?></div>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
+	<table cellpadding=0 cellspacing=10>
+		<tr>
+			<th><?php echo lang('index_fname_th');?></th>
+			<th><?php echo lang('index_lname_th');?></th>
+			<th><?php echo lang('index_email_th');?></th>
+			<th><?php echo lang('index_groups_th');?></th>
+			<th><?php echo lang('index_status_th');?></th>
+			<th><?php echo lang('index_action_th');?></th>
+		</tr>
+		<?php print_r($users); echo $users->first_name; ?>
 
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
+			<tr>
+	            <td><?php echo htmlspecialchars($users->first_name,ENT_QUOTES,'UTF-8');?></td>
+	            <td><?php echo htmlspecialchars($users->last_name,ENT_QUOTES,'UTF-8');?></td>
+	            <td><?php echo htmlspecialchars($users->email,ENT_QUOTES,'UTF-8');?></td>
+				<td>
+					<?php foreach ($users->groups as $group):?>
+						<?php echo anchor("auth/edit_group/".$group->id, htmlspecialchars($group->name,ENT_QUOTES,'UTF-8')) ;?><br />
+	                <?php endforeach?>
+				</td>
+				<td><?php echo ($users->active) ? anchor("auth/deactivate/".$users->id, lang('index_active_link')) : anchor("auth/activate/". $users->id, lang('index_inactive_link'));?></td>
+				<td><?php echo anchor("auth/edit_user/".$users->id, 'Edit') ;?></td>
+			</tr>
 
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
+	</table>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>

@@ -21,17 +21,17 @@
 $lang['error_csrf'] = 'This form post did not pass our security checks.';
 
 // Login
-$lang['login_heading']         = 'Login';
-$lang['login_subheading']      = 'Please login with your email/username and password below.';
-$lang['login_identity_label']  = 'Email/Username:';
-$lang['login_password_label']  = 'Password:';
-$lang['login_remember_label']  = 'Remember Me:';
-$lang['login_submit_btn']      = 'Login';
-$lang['login_forgot_password'] = 'Forgot your password?';
+$lang['login_heading']         = 'ورود به سیستم';
+$lang['login_subheading']      = 'لطفا با نام کاربری ایمیل و رمزعبور داده شده وارد شوید.';
+$lang['login_identity_label']  = 'ایمیل / نام کاربری:';
+$lang['login_password_label']  = 'رمز عبور:';
+$lang['login_remember_label']  = 'مرابخاطر بسپار:';
+$lang['login_submit_btn']      = 'ورود';
+$lang['login_forgot_password'] = 'فراموشی رمز عبور';
 
 // Index
-$lang['index_heading']           = 'Users';
-$lang['index_subheading']        = 'Below is a list of the users.';
+$lang['index_heading']           = 'کاربران';
+$lang['index_subheading']        = 'لیست کاربران در سیستم';
 $lang['index_fname_th']          = 'First Name';
 $lang['index_lname_th']          = 'Last Name';
 $lang['index_email_th']          = 'Email';
@@ -53,7 +53,7 @@ $lang['deactivate_validation_confirm_label'] = 'confirmation';
 $lang['deactivate_validation_user_id_label'] = 'user ID';
 
 // Create User
-$lang['create_user_heading']                           = 'Create User';
+$lang['create_user_heading']                           = 'ایجاد کاربر جدید';
 $lang['create_user_subheading']                        = 'Please enter the user\'s information below.';
 $lang['create_user_fname_label']                       = 'First Name:';
 $lang['create_user_lname_label']                       = 'Last Name:';
@@ -74,7 +74,7 @@ $lang['create_user_validation_password_label']         = 'Password';
 $lang['create_user_validation_password_confirm_label'] = 'Password Confirmation';
 
 // Edit User
-$lang['edit_user_heading']                           = 'Edit User';
+$lang['edit_user_heading']                           = 'ویرایش کاربر';
 $lang['edit_user_subheading']                        = 'Please enter the user\'s information below.';
 $lang['edit_user_fname_label']                       = 'First Name:';
 $lang['edit_user_lname_label']                       = 'Last Name:';

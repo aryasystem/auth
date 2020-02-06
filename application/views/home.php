@@ -1,80 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
 
-	<style type="text/css">
-
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
-</head>
-<body>
-
+?>
 <div id="container">
-	
+
 	<h1><?php echo lang('index_heading');?></h1>
 	<p><?php echo lang('index_subheading');?></p>
 
 	<div id="infoMessage"><?php echo $message;?></div>
 
-	<table cellpadding=0 cellspacing=10>
+	<table cellpadding=0 cellspacing=10 class="table table-striped table-bordered dataTable no-footer">
 		<tr>
 			<th><?php echo lang('index_fname_th');?></th>
 			<th><?php echo lang('index_lname_th');?></th>
@@ -83,25 +18,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<th><?php echo lang('index_status_th');?></th>
 			<th><?php echo lang('index_action_th');?></th>
 		</tr>
-		<?php print_r($users); echo $users->first_name; ?>
-
-			<tr>
-	            <td><?php echo htmlspecialchars($users->first_name,ENT_QUOTES,'UTF-8');?></td>
-	            <td><?php echo htmlspecialchars($users->last_name,ENT_QUOTES,'UTF-8');?></td>
-	            <td><?php echo htmlspecialchars($users->email,ENT_QUOTES,'UTF-8');?></td>
-				<td>
-					<?php foreach ($users->groups as $group):?>
-						<?php echo anchor("auth/edit_group/".$group->id, htmlspecialchars($group->name,ENT_QUOTES,'UTF-8')) ;?><br />
-	                <?php endforeach?>
-				</td>
-				<td><?php echo ($users->active) ? anchor("auth/deactivate/".$users->id, lang('index_active_link')) : anchor("auth/activate/". $users->id, lang('index_inactive_link'));?></td>
-				<td><?php echo anchor("auth/edit_user/".$users->id, 'Edit') ;?></td>
-			</tr>
+		<?php  if ($this->ion_auth->is_admin()): ?>
+			this is a ademin
+			<?php foreach ($users as $user):?>
+				<tr>
+		          <td><?php echo htmlspecialchars($user->first_name,ENT_QUOTES,'UTF-8');?></td>
+		          <td><?php echo htmlspecialchars($user->last_name,ENT_QUOTES,'UTF-8');?></td>
+		          <td><?php echo htmlspecialchars($user->email,ENT_QUOTES,'UTF-8');?></td>
+							<td>
+								<?php foreach ($user->groups as $group):?>
+									<?php echo anchor("auth/edit_group/".$group->id, htmlspecialchars($group->name,ENT_QUOTES,'UTF-8')) ;?><br />
+					              <?php endforeach?>
+							</td>
+							<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, lang('index_active_link')) : anchor("auth/activate/". $user->id, lang('index_inactive_link'));?></td>
+							<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit') ;?></td>
+				</tr>
+			<?php endforeach;?>
+		<?php endif; ?>
+		<?php if (!$this->ion_auth->is_admin()): ?>
+			this is not admin
+				<tr>
+		            <td><?php echo htmlspecialchars($users->first_name,ENT_QUOTES,'UTF-8');?></td>
+		            <td><?php echo htmlspecialchars($users->last_name,ENT_QUOTES,'UTF-8');?></td>
+		            <td><?php echo htmlspecialchars($users->email,ENT_QUOTES,'UTF-8');?></td>
+					<td>
+						<?php foreach ($users->groups as $group):?>
+							<?php echo anchor("auth/edit_group/".$group->id, htmlspecialchars($group->name,ENT_QUOTES,'UTF-8')) ;?><br />
+		        <?php endforeach?>
+					</td>
+					<td><?php echo ($users->active) ? anchor("auth/deactivate/".$users->id, lang('index_active_link')) : anchor("auth/activate/". $users->id, lang('index_inactive_link'));?></td>
+					<td><?php echo anchor("auth/edit_user/".$users->id, 'Edit') ;?></td>
+				</tr>
+		<?php endif; ?>
 
 	</table>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
-
-</body>
-</html>

@@ -24,10 +24,10 @@ $lang['account_creation_invalid_default_group'] = 'Invalid default group name se
 
 
 // Password
-$lang['password_change_successful']          = 'Password Successfully Changed';
-$lang['password_change_unsuccessful']        = 'Unable to Change Password';
-$lang['forgot_password_successful']          = 'Password Reset Email Sent';
-$lang['forgot_password_unsuccessful']        = 'Unable to email the Reset Password link';
+$lang['password_change_successful']          = 'تغییر رمزعبور با موفقیت انجام شد';
+$lang['password_change_unsuccessful']        = 'رمز عبور تغییر پیدا نکرد';
+$lang['forgot_password_successful']          = 'ایمیل تغییر رمز عبور ارسال شد';
+$lang['forgot_password_unsuccessful']        = 'لینک بازسازی رمز عبور ساخته نمی شود';
 
 // Activation
 $lang['activate_successful']                 = 'Account Activated';
@@ -39,11 +39,11 @@ $lang['activation_email_unsuccessful']       = 'Unable to Send Activation Email'
 $lang['deactivate_current_user_unsuccessful']= 'You cannot De-Activate your self.';
 
 // Login / Logout
-$lang['login_successful']                    = 'Logged In Successfully';
-$lang['login_unsuccessful']                  = 'Incorrect Login';
-$lang['login_unsuccessful_not_active']       = 'Account is inactive';
-$lang['login_timeout']                       = 'Temporarily Locked Out.  Try again later.';
-$lang['logout_successful']                   = 'Logged Out Successfully';
+$lang['login_successful']                    = 'ورود با موفقیت انجام شد';
+$lang['login_unsuccessful']                  = 'ورود ناموفق';
+$lang['login_unsuccessful_not_active']       = 'حساب کاربری فعال نیست';
+$lang['login_timeout']                       = 'حساب کاربری بصورت موقتی قفل شده است. بعد از دقایقی دوباره سعی کنید';
+$lang['logout_successful']                   = 'خروج با موفق انجام شد';
 
 // Account Changes
 $lang['update_successful']                   = 'Account Information Successfully Updated';

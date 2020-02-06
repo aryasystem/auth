@@ -26,7 +26,7 @@ class Auth extends CI_Controller
 	 */
 	public function index()
 	{
-
+		$this->load->helper('array');
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
@@ -43,8 +43,10 @@ class Auth extends CI_Controller
 	 		$user = $this->ion_auth->user()->row();
 			$this->data['users'] = $this->ion_auth->user()->row();
 			$this->data['users']->groups = $this->ion_auth->get_users_groups($user->id)->result();
-			print_r($this->data['users']->groups);
-			$this->_render_page( DIRECTORY_SEPARATOR . 'home', $this->data);
+			//print_r($this->data['users']->groups);
+//			$this->_render_page( DIRECTORY_SEPARATOR . 'home', $this->data);
+			$this->template->set('title', 'Home');
+			$this->template->load('default_layout', 'contents' , 'home', $this->data);
 		}
 		else
 		{
@@ -63,8 +65,9 @@ class Auth extends CI_Controller
 			{
 				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 			}
-
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $this->data);
+			//$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $this->data);
+			$this->template->set('title', 'Home');
+			$this->template->load('default_layout', 'contents' , 'home', $this->data);
 		}
 	}
 
@@ -111,15 +114,19 @@ class Auth extends CI_Controller
 				'id' => 'identity',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('identity'),
+				'class'=>"form-control",
 			];
 
 			$this->data['password'] = [
 				'name' => 'password',
 				'id' => 'password',
 				'type' => 'password',
+				'class'=>"form-control",
 			];
 
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'login', $this->data);
+			//$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'login', $this->data);
+			$this->template->set('title', 'Home');
+			$this->template->load('login_layout', 'login_content' , 'auth/login', $this->data);
 		}
 	}
 
@@ -164,23 +171,27 @@ class Auth extends CI_Controller
 				'name' => 'old',
 				'id' => 'old',
 				'type' => 'password',
+				'class'=>"form-control",
 			];
 			$this->data['new_password'] = [
 				'name' => 'new',
 				'id' => 'new',
 				'type' => 'password',
+				'class'=>"form-control",
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			];
 			$this->data['new_password_confirm'] = [
 				'name' => 'new_confirm',
 				'id' => 'new_confirm',
 				'type' => 'password',
+				'class'=>"form-control",
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			];
 			$this->data['user_id'] = [
 				'name' => 'user_id',
 				'id' => 'user_id',
 				'type' => 'hidden',
+				'class'=>"form-control",
 				'value' => $user->id,
 			];
 
@@ -232,6 +243,7 @@ class Auth extends CI_Controller
 			$this->data['identity'] = [
 				'name' => 'identity',
 				'id' => 'identity',
+				'class'=>"form-control",
 			];
 
 			if ($this->config->item('identity', 'ion_auth') != 'email')
@@ -321,16 +333,19 @@ class Auth extends CI_Controller
 					'id' => 'new',
 					'type' => 'password',
 					'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
+					'class'=>"form-control",
 				];
 				$this->data['new_password_confirm'] = [
 					'name' => 'new_confirm',
 					'id' => 'new_confirm',
 					'type' => 'password',
 					'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
+					'class'=>"form-control",
 				];
 				$this->data['user_id'] = [
 					'name' => 'user_id',
 					'id' => 'user_id',
+					'class'=>"form-control",
 					'type' => 'hidden',
 					'value' => $user->id,
 				];
@@ -527,47 +542,55 @@ class Auth extends CI_Controller
 				'name' => 'first_name',
 				'id' => 'first_name',
 				'type' => 'text',
+				'class'=>"form-control",
 				'value' => $this->form_validation->set_value('first_name'),
 			];
 			$this->data['last_name'] = [
 				'name' => 'last_name',
 				'id' => 'last_name',
+				'class'=>"form-control",
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('last_name'),
 			];
 			$this->data['identity'] = [
 				'name' => 'identity',
 				'id' => 'identity',
+				'class'=>"form-control",
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('identity'),
 			];
 			$this->data['email'] = [
 				'name' => 'email',
 				'id' => 'email',
+				'class'=>"form-control",
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('email'),
 			];
 			$this->data['company'] = [
 				'name' => 'company',
 				'id' => 'company',
+				'class'=>"form-control",
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('company'),
 			];
 			$this->data['phone'] = [
 				'name' => 'phone',
 				'id' => 'phone',
+				'class'=>"form-control",
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('phone'),
 			];
 			$this->data['password'] = [
 				'name' => 'password',
 				'id' => 'password',
+				'class'=>"form-control",
 				'type' => 'password',
 				'value' => $this->form_validation->set_value('password'),
 			];
 			$this->data['password_confirm'] = [
 				'name' => 'password_confirm',
 				'id' => 'password_confirm',
+				'class'=>"form-control",
 				'type' => 'password',
 				'value' => $this->form_validation->set_value('password_confirm'),
 			];
@@ -693,35 +716,41 @@ class Auth extends CI_Controller
 		$this->data['first_name'] = [
 			'name'  => 'first_name',
 			'id'    => 'first_name',
+			'class'=>"form-control",
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('first_name', $user->first_name),
 		];
 		$this->data['last_name'] = [
 			'name'  => 'last_name',
 			'id'    => 'last_name',
+			'class'=>"form-control",
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('last_name', $user->last_name),
 		];
 		$this->data['company'] = [
 			'name'  => 'company',
 			'id'    => 'company',
+			'class'=>"form-control",
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('company', $user->company),
 		];
 		$this->data['phone'] = [
 			'name'  => 'phone',
 			'id'    => 'phone',
+			'class'=>"form-control",
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('phone', $user->phone),
 		];
 		$this->data['password'] = [
 			'name' => 'password',
 			'id'   => 'password',
+			'class'=>"form-control",
 			'type' => 'password'
 		];
 		$this->data['password_confirm'] = [
 			'name' => 'password_confirm',
 			'id'   => 'password_confirm',
+			'class'=>"form-control",
 			'type' => 'password'
 		];
 
@@ -766,12 +795,14 @@ class Auth extends CI_Controller
 		$this->data['group_name'] = [
 			'name'  => 'group_name',
 			'id'    => 'group_name',
+			'class'=>"form-control",
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('group_name'),
 		];
 		$this->data['description'] = [
 			'name'  => 'description',
 			'id'    => 'description',
+			'class'=>"form-control",
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('description'),
 		];
@@ -834,6 +865,7 @@ class Auth extends CI_Controller
 		$this->data['group_name'] = [
 			'name'    => 'group_name',
 			'id'      => 'group_name',
+			'class'=>"form-control",
 			'type'    => 'text',
 			'value'   => $this->form_validation->set_value('group_name', $group->name),
 		];
@@ -844,6 +876,7 @@ class Auth extends CI_Controller
 		$this->data['group_description'] = [
 			'name'  => 'group_description',
 			'id'    => 'group_description',
+			'class'=>"form-control",
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		];
